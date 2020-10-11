@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+		
+	<b:column col-lg="12" col-md="12" col-sm="12" col-xs="12" style="font-size:0.9em; text-align:justify !important;">
+		<fieldset>
+			<legend style="font-size: 1.2em; text-align : justify !important;">&#160;#{labels['lbl.busqueda']}&#160;</legend>
+			<b:panelGrid col-spans="2,4,2,4" rowClasses="espaciorow" id="pgBusqueda">
+				<p:outputLabel for="selectEstadoSearch" value="Tipo: " />
+		        <p:selectOneMenu id="selectEstadoSearch" filter="true" filterMatchMode="contains"
+		        	value="#{adminTicket.ticketDM.ticketBusqueda.catalogoEstado.id}" style="width:100%;">
+		            <f:selectItem itemLabel="All" itemValue="" />
+		            <f:selectItems value="#{adminTicket.ticketDM.estadosList}" var="estado" 
+		            	itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
+		        </p:selectOneMenu>
+		     				
+			</b:panelGrid>
+			
+			<p:spacer />
+			<b:panelGrid col-spans="6,6">
+				<p:commandButton id="btnBuscar" value="#{labels['btn.buscar']}" action="#{adminTicket.buscarTicket(true)}" 
+					ajax="true" update="bpTicketsList,growlMsg" styleClass="btn btn-xs btn-primary" icon="ui-icon-search"/>
+				<p:commandButton id="btnLimpiar" value="Limpiar" action="#{adminTicket.limpiarBusqueda()}" 
+					ajax="true" update="pgBusqueda" styleClass="btn btn-xs" icon="ui-icon-trash"/>
+			</b:panelGrid>
+			
+		</fieldset>
+	</b:column>
+</ui:composition>

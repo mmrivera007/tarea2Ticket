@@ -1,0 +1,94 @@
+body {
+    background-image: url("#{resource['images/intranet:america_body_gris.png']}");
+    background-color: #F7F7F7;
+    background-repeat: no-repeat;
+    background-position: right top;
+    color: #0000000;
+    cursor: default;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 10px !important;
+
+ }
+.label {
+    font-weight: bold;
+}
+.rf-dg, .rf-dg-c{
+    border:none;
+}
+/*Clase para las copiones de modulos*/
+.pbody{
+    width: 100%;
+    height: 100%;
+    /*height: 60px;*/
+    /*alignment-adjust: central;*/
+} 
+
+.panel_modulos {
+    float: right;
+}  
+table.tablaNormal {
+    border-width: 1px;
+    border-spacing: 1px;
+    border-style: solid;
+    border-color: #CEE3F6;
+    border-collapse: collapse;
+    background-color: white;
+}
+table.tablaNormal th {
+    border-width: 1px;
+    padding: 2px;
+    border-style: solid;
+    border-color: #CEE3F6;
+}
+table.tablaNormal td {
+    font: 10px Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    border-width: 1px;
+    padding: 2px;
+    border-style: solid;
+    border-color: #CEE3F6;
+}
+td {
+    vertical-align: top;
+}
+
+h1 {color:#ef9832;font-size:1.7em;margin:0 0 5px 0;font-weight:bold;display:block;border-bottom:1px dotted #00659f}
+h2 {font-size:1.2em;margin:10px 0 2px 0;padding:0;color:#00659f}
+h3 {font-size:1em;color:#ef9832;margin:0}
+p {text-align:justify}
+errors {text-color:red}
+
+#panelPrincipalUsuario > tbody > tr > td:first-child { 
+    width: 100px;
+}
+
+.rf-edt-c-j_idt150 {
+    width: 200% !important;
+}
+
+/*Sobreescribe el margen izquierdo de los elementos del menu*/
+table.rf-pm-itm-gr > tbody > tr > td.rf-pm-itm-ico { 
+    padding-left: 0px !important;
+}
+
+/*Para la fila seleccionada del extendeddatatable*/
+.rf-edt-r-sel {
+    background-color:  activecaption !important;   
+}
+/*Para item seleccionado del menu*/
+.rf-pm-itm-sel{
+    color: orangered !important;
+    font-weight: bolder !important;
+}
+.rf-p-b {
+    padding: 0px !important;
+}
+
+.rf-dt-c{
+    
+    padding: 1px !important;
+}
+/* Estilo de las celdas para el panel notas con extendeddatatable*/
+.rf-edt-c-cnt{
+    padding: 0px !important;
+}

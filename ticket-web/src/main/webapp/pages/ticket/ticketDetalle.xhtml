@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<b:column col-lg="12" col-md="12" col-sm="12" col-xs="12" style="font-size:0.9em; text-align:justify !important;">
+		<b:commandButton id="btnNuevoTicketDetalle" title="Registrar nueva nota" value="Nueva Nota" icon-awesome="fa fa-plus" look="success" 
+			action="#{adminTicket.nuevoTicketDetalle}" process="@this" ajax="true" update="idpageTicketDetalles" rendered="#{!ticketDM.edicion}"/>
+		<b:commandButton id="btnRegresarTicketDetalles" title="Regresar a pantalla principal" value="Regresar" icon-awesome="fa fa-toggle-left" look="default" 
+			action="#{adminTicket.regresarPrincipal}" process="@this" ajax="true" update="idpageSearchList" rendered="#{!ticketDM.edicion}"/>
+			
+		<b:panel id="bpTicketDetalleList" title="#{labels['lbl.tickets.ticketDetalles.resultado.busqueda']} ticket #: #{ticketDM.ticketEdicion.id}"
+			collapsible="false" look="tabla" rendered="#{!ticketDM.edicion}">
+			<p:dataTable id="pdTicketDetalle" var="ticketDetalle" value="#{ticketDM.ticketDetalleList}"								
+				emptyMessage="#{labels['lbl.lista.vacia']}" tableStyleClass="dataTab" rowKey="#{ticketDetalle.id}" style="font-size:1.1em;">
+								
+				<p:column width="20%" headerText="Nota">
+					<h:outputText value="#{ticketDetalle.nota}"/>
+				</p:column>
+				<p:column width="10%" headerText="Estado">
+					<h:outputText value="#{ticketDetalle.estado == 'ACT'? 'ACTIVO':'INACTIVO'}"/>
+				</p:column>
+				<p:column width="10%" headerText="#{labels['lbl.opciones']}">
+					<p:commandButton id="cbEditar" title="Editar registro" action="#{adminTicket.editarTicketDetalle(ticketDetalle)}"
+					 	process="@this" update="principal:idpageTicketDetalles" ajax="true" styleClass="btn btn-xs btn-primary" icon="ui-icon-pencil">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</b:panel>
+		
+		<b:panel id="bpTicketDetalleEdicion" 
+			title="#{ticketDM.ticketDetalleEdicion.id == null? 'Registrar detalle':'Editar detalle'} ticket #: #{ticketDM.ticketEdicion.id}" 
+			collapsible="false" look="tabla" rendered="#{ticketDM.edicion}">
+			
+			<p:panelGrid id="pgTicketDetalleEdicion" layout="grid" rowClasses="espaciorow" columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4">
+				<f:facet name="header">
+					<p:outputLabel value="Formulario de registro" />
+				</f:facet>
+				<p:outputLabel for="txtNota" value="Nota: " />
+				<p:inputText id="txtNota" value="#{adminTicket.ticketDM.ticketDetalleEdicion.nota}" maxlength="128" required="true" style="width:100%;"/>
+				
+				<p:outputLabel for="selectEstadoD" value="Estado: " />
+				<p:selectOneMenu id="selectEstadoD" value="#{ticketDM.ticketDetalleEdicion.estado}" style="width:100%;" required="true">
+		            <f:selectItem itemLabel="Seleccione un estado" itemValue="" />
+		            <f:selectItem itemLabel="ACTIVO" itemValue="ACT" />
+		            <f:selectItem itemLabel="INACTIVO" itemValue="INA" />
+		        </p:selectOneMenu>
+		        		        
+				<f:facet name="footer">
+					<p:commandButton id="btnGuardarD" value="Guardar" action="#{adminTicket.guardarTicketDetalle}"
+						update="growlMsg,idpageTicketDetalles" styleClass="btn btn-sm btn-primary" icon="ui-icon-disk">						
+					</p:commandButton>
+
+					<p:commandButton id="btnCancelarD" value="Cancelar" process="@this" ajax="true" action="#{adminTicket.cancelarEdicion}" 
+						update="idpageTicketDetalles" styleClass="btn btn-sm" icon="ui-icon-close"></p:commandButton>
+				</f:facet>
+			</p:panelGrid>
+		</b:panel>
+		
+	</b:column>
+
+</ui:composition>

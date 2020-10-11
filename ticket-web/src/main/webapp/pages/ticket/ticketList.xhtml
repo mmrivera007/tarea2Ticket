@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<b:column id="bcTicketsList" styleClass="alinea"
+		col-lg="12" col-md="12" col-sm="12" col-xs="12" style="font-size:1.0em; text-align:justify !important;">
+		
+		
+		<p:selectOneMenu id="selectEstadoSearchL" filter="true" filterMatchMode="contains" 
+        	value="#{adminTicket.ticketDM.ticketBusqueda.catalogoEstado.id}">
+            <f:selectItem itemLabel="All" itemValue="" />
+            <f:selectItems value="#{adminTicket.ticketDM.estadosList}" var="estado" 
+            	itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
+            	
+            <p:ajax listener="#{adminTicket.buscarTicket(true)}" update="bpTicketsList,growlMsg" event="valueChange"/>
+        </p:selectOneMenu>
+		        
+		<b:commandButton id="btnNuevo" title="Registrar nuevo Ticket" value="Nuevo ticket" icon-awesome="fa fa-plus" look="success" 
+			rendered="#{adminTicket.ticketDM.opcion == null}"
+			action="#{adminTicket.nuevoTicket}" process="@this" ajax="true" update="idpageSearchList"/>
+			
+		<b:panel id="bpTicketsList" title="#{labels['lbl.tickets.resultado.busqueda']}" collapsible="false" look="tabla">
+			<p:dataTable id="pdcTiket" var="ticket" value="#{adminTicket.ticketDM.ticketList}"								
+				emptyMessage="#{labels['lbl.lista.vacia']}" tableStyleClass="dataTab" rowKey="#{ticket.id}" style="font-size:1.0em;">
+				
+				<p:column width="8%" headerText="Cliente">
+					<p:commandButton id="cbClienteInfo" title="Información Cliente" rendered="#{ticket.cliente.id != null}"
+						action="#{adminTicket.verInfoCliente(ticket)}" oncomplete="$('.modalPseudoClassCliente').modal();return false;"
+						update="principal:growlMsg,principal:idpageList,@([id$=modalCliente])" ajax="true" styleClass="btn btn-xs btn-primary" icon="ui-icon-note">						
+					</p:commandButton>
+				</p:column>
+				<p:column width="35%" headerText="Ticket">
+					<b>#<h:outputText value="#{ticket.id}"/></b>
+					<br/>
+					<p:commandButton id="cbEditar" title="Editar ticket" rendered="#{adminTicket.ticketDM.opcion == null}"
+						action="#{adminTicket.editarTicket(ticket)}" process="@this" update="principal:idpageSearchList" ajax="true" 
+						styleClass="btn btn-xs btn-primary" icon="ui-icon-pencil">						
+					</p:commandButton>
+					<h:outputText value="#{ticket.descripcion}"/>
+				</p:column>
+				<p:column width="7%" headerText="">					
+					<p:commandButton id="cbTicketDetalles" title="Ingreso detalle" 
+						action="#{adminTicket.administrarTicketDetalles(ticket)}" process="@this" update="principal:idpageSearchList" ajax="true" 
+						styleClass="btn btn-xs btn-info" icon="ui-icon-comment">
+					</p:commandButton>
+					<h:outputText value="#{ticket.totalNotas}" rendered="#{ticket.totalNotas != null}" style="color:green"/>
+				</p:column>
+				<p:column width="8%" headerText="Estado">
+					<h:outputText value="#{ticket.catalogoEstado.nombre}" rendered="#{ticket.catalogoEstado.nombre == 'Escalated'}" style="color:red"/>
+					<h:outputText value="#{ticket.catalogoEstado.nombre}" rendered="#{ticket.catalogoEstado.nombre == 'Closed'}" style="color:green"/>
+					<h:outputText value="#{ticket.catalogoEstado.nombre}" rendered="#{ticket.catalogoEstado.nombre != 'Escalated' and ticket.catalogoEstado.nombre != 'Closed'}" style="color:black"/>
+				</p:column>
+				<p:column width="8%" headerText="Prioridad">
+					<h:outputText value="#{ticket.catalogoPrioridad.nombre}"/>
+				</p:column>		
+				<p:column width="10%" headerText="Técnico">
+					<i class="fa fa-user fa-2x"> </i>
+					<h:outputText value="#{ticket.tecnico.nombre}"/>
+				</p:column>
+				<p:column width="8%" headerText="Fecha vencimiento">
+					<h:outputText value="#{ticket.fechaFin}">
+						<f:convertDateTime type="date" pattern="dd MMM,yyyy" locale="es_EC" timeZone="America/Bogota"/>
+					</h:outputText>
+				</p:column>
+				<p:column width="16%" headerText="Oferta">
+					<p:commandButton id="cbEliminar" title="Eliminar ticket" action="#{adminTicket.eliminarTicket(ticket)}"
+						update="principal:growlMsg,principal:idpageList" ajax="true" styleClass="btn btn-xs btn-primary" icon="ui-icon-trash">
+					</p:commandButton>
+					<a href="#" class="deal"><h:outputText value="#{ticket.oferta.nombre}"/></a>					
+				</p:column>
+			</p:dataTable>
+		</b:panel>
+		
+	</b:column>
+	
+	
+	<!-- Modal para pesentar información del cliente -->
+	<b:modal id="modalCliente" title="Información Cliente" styleClass="modalPseudoClassCliente" rendered="#{adminTicket.ticketDM.confirma}" closable="false" close-on-escape="false" backdrop="false">
+		<b:panel id="bpCliente">
+			<h:panelGrid columns="1" style="font-size:0.9em;text-align:justify !important;valign:top" title="">
+				<p:outputLabel value="Nombre" style="color:darkgreen"/>
+				<p:outputLabel value="#{adminTicket.ticketDM.ticketEdicion.cliente.nombre}" style="color:darkgreen"/>
+				<p:separator />	
+				<p:outputLabel value="Teléfono:"/>
+				<p:outputLabel value="#{adminTicket.ticketDM.ticketEdicion.cliente.celular}" style="color:darkgreen"/>
+				<p:separator />	
+				<p:outputLabel value="Email:"/>
+				<p:outputLabel value="#{adminTicket.ticketDM.ticketEdicion.cliente.email}" style="color:darkgreen"/>				
+			</h:panelGrid>
+		</b:panel>
+		<f:facet name="footer">
+			<b:commandButton value="Aceptar" look="success" ajax="true" update="modalCliente" action="#{adminTicket.cerrarInfoCliente()}" oncomplete="$('.modalPseudoClassCliente').modal('hide');return false;"/>			
+		</f:facet>	
+	</b:modal>
+</ui:composition>

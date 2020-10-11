@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+	<b:column col-lg="12" col-md="12" col-sm="12" col-xs="12" style="font-size:0.9em; text-align:justify !important;">
+		<fieldset>
+			<legend style="font-size: 1.2em; text-align : justify !important;">&#160;#{adminTicket.ticketDM.ticketEdicion.id == null? 'Registrar ticket':'Editar ticket'}&#160;</legend>
+			<p:panelGrid id="pgEdicion" layout="grid" rowClasses="espaciorow" columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-1,ui-grid-col-5">
+				<f:facet name="header">
+					<p:outputLabel value="Formulario de registro" />
+				</f:facet>
+				<p:outputLabel for="selectEstado" value="Estado: " />
+		        <p:selectOneMenu id="selectEstado" filter="true" filterMatchMode="contains" required="true"
+		        	value="#{adminTicket.ticketDM.ticketEdicion.catalogoEstado.id}" style="width:100%;">
+		            <f:selectItem itemLabel="Seleccione un tipo" itemValue="" />
+		            <f:selectItems value="#{adminTicket.ticketDM.estadosList}" var="estado" 
+		            	itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
+		        </p:selectOneMenu>
+		     
+				<p:outputLabel for="selectPrioridad" value="Prioridad: " />
+				<p:selectOneMenu id="selectPrioridad" value="#{adminTicket.ticketDM.ticketEdicion.catalogoPrioridad.id}" style="width:100%;">
+		            <f:selectItem itemLabel="Seleccione una prioridad" itemValue="" />
+		            <f:selectItems value="#{adminTicket.ticketDM.prioridadList}" var="prioridad" 
+		            	itemLabel="#{prioridad.nombre}" itemValue="#{prioridad.id}"/>
+		        </p:selectOneMenu>
+		        
+		        <p:outputLabel for="selectCliente" value="Cliente: " />
+				<p:selectOneMenu id="selectCliente" value="#{adminTicket.ticketDM.ticketEdicion.cliente.id}" style="width:100%;">
+		            <f:selectItem itemLabel="Seleccione un cliente" itemValue="" />
+		            <f:selectItems value="#{adminTicket.ticketDM.clienteList}" var="cliente" 
+		            	itemLabel="#{cliente.nombre}" itemValue="#{cliente.id}"/>
+		        </p:selectOneMenu>
+		        
+		        <p:outputLabel for="txtDescripcion" value="Descripción: " />
+				<p:inputText id="txtDescripcion" value="#{adminTicket.ticketDM.ticketEdicion.descripcion}" maxlength="256" required="true" style="width:100%;"/>
+				
+				<p:outputLabel for="selectTecnico" value="Técnico: " />
+				<p:selectOneMenu id="selectTecnico" value="#{adminTicket.ticketDM.ticketEdicion.tecnico.id}" style="width:100%;">
+		            <f:selectItem itemLabel="Seleccione un técnico" itemValue="" />
+		            <f:selectItems value="#{adminTicket.ticketDM.tecnicoList}" var="tecnico" 
+		            	itemLabel="#{tecnico.nombre}" itemValue="#{tecnico.id}"/>
+		        </p:selectOneMenu>
+		        
+		        <p:outputLabel for="selectOferta" value="Oferta: " />
+				<p:selectOneMenu id="selectOferta" value="#{adminTicket.ticketDM.ticketEdicion.oferta.id}" style="width:100%;">
+		            <f:selectItem itemLabel="Seleccione una oferta" itemValue="" />
+		            <f:selectItems value="#{adminTicket.ticketDM.ofertaList}" var="oferta" 
+		            	itemLabel="#{oferta.nombre}" itemValue="#{oferta.id}"/>
+		        </p:selectOneMenu>
+		        
+				<p:outputLabel for="calFechaFin" value="Fecha vencimiento: " />
+				<p:calendar id="calFechaFin" value="#{adminTicket.ticketDM.ticketEdicion.fechaFin}" size="8"
+					locale="es_EC" navigator="true" pattern="dd/MM/yyyy" />
+					
+		        <f:facet name="footer">
+					<p:commandButton id="btnGuardar" value="Guardar" action="#{adminTicket.guardarTicket}"
+						update="growlMsg,idpageSearchList" styleClass="btn btn-sm btn-primary" icon="ui-icon-disk">						
+					</p:commandButton>
+
+					<p:commandButton id="btnCancelar" value="Cancelar" process="@this" ajax="true" action="#{adminTicket.cancelarEdicion}" 
+						update="idpageSearchList" styleClass="btn btn-sm" icon="ui-icon-close"></p:commandButton>
+				</f:facet>
+			</p:panelGrid>
+		</fieldset>		
+	</b:column>
+</ui:composition>

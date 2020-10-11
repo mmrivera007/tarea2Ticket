@@ -1,0 +1,161 @@
+.modal-footer {   border-top: 0px; }
+
+.form {
+  position: relative;
+  z-index: 1;
+  /*max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;*/
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+#login #head-content #logo{
+  background: url("../../resources/img/logo.png") no-repeat left  ;
+/*  float: left; */
+  height: 100px !important;
+  width:  100% !important;
+  overflow: hidden;
+}
+
+#login #head-content #title{
+  color: #ffffff;
+  padding: 6% 6% 6% 6%;
+  font-size: 1.8em;
+  font-weight: bold;
+/*  width: 100%; */
+}
+
+.panel-info > .panel-heading {
+    color: #ffffff;
+    background-color: rgba(0, 60, 96, 0.75);
+    border-color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.alert-danger{
+  text-align: left !important;
+}
+
+.panel {
+  background-color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 25%;
+}
+
+.label-info {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.label {
+  color: #000000;
+}
+
+/*FOOTER*/
+
+#footer #bandera{
+  height: 1px;
+  border-bottom: #0e92b8 1px solid;
+}
+
+#footer #texto{
+  color: #ffffff;
+  font-size: 1.1em;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
+/* Cabecera */
+
+#cabecera{
+    
+}
+#cabecera #superior{
+    background: rgba(0, 60, 96, 0.75);
+}
+#cabecera #superior #logoc{
+    padding: 1em 0 0;
+    text-align: center;
+}
+#cabecera #superior #texto{
+    color: #fff;
+    font-size: 1.6em;
+    padding: 1em;
+    text-align: right;
+    font-weight: bold;
+}
+
+#cabecera #linea{
+    background: rgba(0, 60, 96, 0.75);
+    margin-top: 0.4em;
+    height: 0.5em;
+    margin-bottom: 5em;
+}
+/* Pie de P�gina */
+
+#pie {
+    /*position: absolute;*/
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+#linea{
+    background: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.4em;
+    height: 0.5em;
+    margin-top: -0.9em;
+}
+#pie #texto{
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.7em 0px;
+    color: rgba(0, 60, 96, 1)
+}
+
+
+.loginfooter .container-fluid > .navbar-collapse, .container-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
+	 margin-right: -2% !important;
+    margin-left: -2% !important;
+}

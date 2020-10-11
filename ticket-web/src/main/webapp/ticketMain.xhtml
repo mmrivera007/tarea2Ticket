@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/templates/principal.xhtml">
+	<ui:define name="contenidoAplicacion">
+		<h:head>
+			<h:outputScript library="js" name="util.js" target="head" />
+		</h:head>
+		<h:body>
+			<h:form id="principal">
+			
+				<b:growl id="growlMsg" globalOnly="true" placementFrom="top"
+					style="text-align:left;" show-detail="false" global-only="false"
+					show-summary="true" allow-dismiss="true"
+					animation-enter="animated bounceInDown"
+					animation-exit="animated flipOutX" escape="true" />
+				
+				<b:panel id="idpageSearchList">
+					<ui:remove>
+					<b:panelGrid id="idpageSearch" col-spans="12" rendered="#{adminTicket.ticketDM.pantallaActual == 'principal'}">
+						<ui:include src="/pages/ticket/ticketSearch.xhtml" />
+						<p:separator />
+					</b:panelGrid>
+					</ui:remove>
+					<b:panelGrid id="idpageList" col-spans="12" style="width:100%;margin: 0 auto" rendered="#{adminTicket.ticketDM.pantallaActual == 'principal'}">
+						<ui:include src="/pages/ticket/ticketList.xhtml" />
+					</b:panelGrid>
+
+					<b:panelGrid id="idpageRegistro" col-spans="12" style="width:100%;margin: 0 auto" rendered="#{adminTicket.ticketDM.pantallaActual == 'registro'}">
+						<ui:include src="/pages/ticket/ticketRegistro.xhtml" />
+					</b:panelGrid>
+					
+					<b:panelGrid id="idpageTicketDetalles" col-spans="12" style="width:100%;margin: 0 auto" rendered="#{adminTicket.ticketDM.pantallaActual == 'ticketDetalles'}">
+						<ui:include src="/pages/ticket/ticketDetalle.xhtml" />
+					</b:panelGrid>
+					
+				</b:panel>
+				
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>

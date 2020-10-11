@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.puntonet</groupId>
+  <artifactId>ticket</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  
+  <name>ticket</name>
+  <description>Gestión de tickets</description>
+  
+  <properties>
+  		<nombreapp>tickets</nombreapp>
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>		
+		<apache.deploy.dir>C:\wildfly-10.1.0.Final\standalone\deployments\</apache.deploy.dir>
+	</properties>
+
+  <modules>
+		<module>ticket-ejb</module>
+		<module>ticket-web</module>
+		<module>ticket-ear</module>
+  </modules>
+  
+</project>
