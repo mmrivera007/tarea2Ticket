@@ -1,0 +1,2 @@
+
+GRANT ALL PRIVILEGES ON DATABASE ticket TO ticket;
