@@ -236,10 +236,14 @@ public class AdminTicket extends ControladorBase{
     public void eliminarTicket(Ticket ticket){
     	log.info(":eliminarTicket...");
     	try{
-	    	ticketBO.eliminarTicket(ticket);
-	    	addInfoMessage(obtenerMensajeRecurso("ticket.eliminar.ticket.exito"), null);
-	    	
-	    	this.buscarTicket(false);
+    		if(ticket.getTotalNotas() != null && ticket.getTotalNotas()>0){
+    			addWarnMessage(obtenerMensajeRecurso("ticket.eliminar.ticket.warn"), null);
+    		}else{
+		    	ticketBO.eliminarTicket(ticket);
+		    	addInfoMessage(obtenerMensajeRecurso("ticket.eliminar.ticket.exito"), null);
+		    	
+		    	this.buscarTicket(false);
+	    	}
 	    } catch (Exception e) {
 			log.info(e);    		
 			addErrorMessage(e.getMessage(), null);
